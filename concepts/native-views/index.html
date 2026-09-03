@@ -18,7 +18,7 @@
         <link rel="prev" href="../layout/">
       
       
-        <link rel="next" href="../../guides/android/">
+        <link rel="next" href="../bridge/">
       
       
         
@@ -541,6 +541,8 @@
       
         
       
+        
+      
     
     
     
@@ -863,10 +865,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-handler-protocol" class="md-nav__link">
+  <a href="#component-managers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The handler protocol
+        Component managers
       
     </span>
   </a>
@@ -874,10 +876,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#events-never-cross-the-bridge" class="md-nav__link">
+  <a href="#events-never-cross-the-bridge-as-callables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Events never cross the bridge
+        Events never cross the bridge as callables
       
     </span>
   </a>
@@ -954,6 +956,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Native Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1978,6 +2008,8 @@
       
         
       
+        
+      
     
     
     
@@ -2676,6 +2708,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/mutations/" class="md-nav__link">
         
   
@@ -3179,10 +3239,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-handler-protocol" class="md-nav__link">
+  <a href="#component-managers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The handler protocol
+        Component managers
       
     </span>
   </a>
@@ -3190,10 +3250,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#events-never-cross-the-bridge" class="md-nav__link">
+  <a href="#events-never-cross-the-bridge-as-callables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Events never cross the bridge
+        Events never cross the bridge as callables
       
     </span>
   </a>
@@ -3307,12 +3367,17 @@ the whole list to the
 <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;NativeViewRegistry&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.NativeViewRegistry"><code>NativeViewRegistry</code></a> in
 a single
 <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-method&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;apply_mutations&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.NativeViewRegistry.apply_mutations"><code>apply_mutations</code></a>
-call per commit. The registry resolves each tag to a native view and
-dispatches each op to the right
-<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ViewHandler&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.base.ViewHandler"><code>ViewHandler</code></a>.</p>
-<p>This page describes that boundary, walks through what a handler
-actually does on each platform, and covers the fake backend used by
-<code>pytest</code>.</p>
+call per commit.</p>
+<p>On a device that registry is the
+<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;BridgeBackend&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.bridge_backend.BridgeBackend"><code>BridgeBackend</code></a>:
+it serializes the batch and sends it across the
+<a href="../bridge/">native bridge</a> in one call, where a Swift or Kotlin
+<strong>component manager</strong> per element type creates and updates the real
+views. Off device the registry dispatches to Python
+<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ViewHandler&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.base.ViewHandler"><code>ViewHandler</code></a> objects
+(Tkinter for <code>pn preview</code>, an in-memory fake for tests).</p>
+<p>This page describes that boundary, walks through what a component
+manager does, and covers the fake backend used by <code>pytest</code>.</p>
 <h2 id="the-commit-protocol">The commit protocol<a class="headerlink" href="#the-commit-protocol" title="Permanent link">&para;</a></h2>
 <p>Every commit is one transaction: an ordered list of ops from
 <code>pythonnative.mutations</code>, applied atomically from the perspective of
@@ -3350,173 +3415,157 @@ the render loop.</p>
 <p>Tags matter because the diff phase is pure: it runs before any native
 view exists, so ops can't reference views directly. Tags also give the
 native side a stable identity for event routing and animation
-bookkeeping, and a flat op list is trivially serializable; the door
-stays open for applying mutations through a single JNI/ObjC crossing.</p>
-<h2 id="the-handler-protocol">The handler protocol<a class="headerlink" href="#the-handler-protocol" title="Permanent link">&para;</a></h2>
-<p>Every native widget is implemented as a class that fulfils the
-<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ViewHandler&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.base.ViewHandler"><code>ViewHandler</code></a> interface.
-The registry resolves tags to views; handlers receive native view
-objects:</p>
+bookkeeping, and the flat op list is what makes a single crossing per
+commit possible. On the wire each op is a short JSON array
+(<code>["c", tag, "Text", {...}]</code>); see <a href="../bridge/#transactions">Transactions</a>.</p>
+<h2 id="component-managers">Component managers<a class="headerlink" href="#component-managers" title="Permanent link">&para;</a></h2>
+<p>On device every element type is implemented by a Swift
+<code>PNComponentManager</code> (in <code>PythonNativeKit</code>) and a Kotlin
+<code>ComponentManager</code> (in the <code>pythonnative</code> Gradle module). One manager
+instance serves every view of its type; per-view state lives on the
+view. The hooks mirror the op list:</p>
 <table>
 <thead>
 <tr>
-<th>Method</th>
-<th>When it's called</th>
+<th>Hook</th>
+<th>When it runs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>create(tag, props)</code></td>
-<td>Once, when the element first mounts. Returns a native view object.</td>
+<td><code>makeView</code> / <code>createView(tag, props)</code></td>
+<td>Once per <code>c</code> op. Builds the platform view and applies initial props.</td>
 </tr>
 <tr>
-<td><code>update(view, changed_props)</code></td>
-<td>On commits where the element survived the diff with changed props.</td>
+<td><code>apply(props, initial)</code></td>
+<td>On create (full props) and on every <code>u</code> op (changed keys only; removed props arrive as <code>null</code>).</td>
 </tr>
 <tr>
-<td><code>insert_child(parent, child, index)</code></td>
-<td>When a child appears in (or moves to) a slot.</td>
+<td><code>insertChild(parent, child, index)</code></td>
+<td>On <code>i</code>. Move-aware and clamped.</td>
 </tr>
 <tr>
-<td><code>remove_child(parent, child)</code></td>
+<td><code>removeChild(parent, child)</code></td>
 <td>When a child is detached.</td>
 </tr>
 <tr>
 <td><code>destroy(view)</code></td>
-<td>When the view is released: unhook listeners, cancel image loads, etc.</td>
+<td>On <code>d</code>. Unwires gestures and animations, then removes the view.</td>
 </tr>
 <tr>
-<td><code>set_frame(view, x, y, width, height)</code></td>
-<td>When the layout engine computed a different frame than last pass.</td>
+<td><code>setFrame(view, x, y, w, h)</code></td>
+<td>On <code>f</code>. Frames are points (iOS) or dp (Android).</td>
 </tr>
 <tr>
-<td><code>measure_intrinsic(view, max_w, max_h)</code></td>
-<td>Called by the layout engine on leaf widgets that need a content-derived size.</td>
+<td><code>measure(view, maxW, maxH)</code></td>
+<td>Synchronously, when the layout engine needs a content-derived size.</td>
+</tr>
+<tr>
+<td><code>command(view, name, args)</code></td>
+<td>For imperative actions (<code>focus</code>, <code>scroll_to_offset</code>, ...).</td>
+</tr>
+<tr>
+<td><code>startAnimation</code> / <code>cancelAnimation</code></td>
+<td>For natively driven <code>Animated</code> values.</td>
 </tr>
 </tbody>
 </table>
-<p>Handlers receive the <code>tag</code> at creation so they can wire their platform
-listeners <strong>once</strong>, dispatching back through
-<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;dispatch_event&lt;/span&gt;" href="../../api/events/#pythonnative.events.dispatch_event"><code>dispatch_event</code></a>:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pythonnative.events</span><span class="w"> </span><span class="kn">import</span> <span class="n">dispatch_event</span><span class="p">,</span> <span class="n">event_names</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyHandler</span><span class="p">(</span><span class="n">ViewHandler</span><span class="p">):</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">props</span><span class="p">):</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">v</span> <span class="o">=</span> <span class="n">NativeWidget</span><span class="p">()</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="k">if</span> <span class="s2">"on_change"</span> <span class="ow">in</span> <span class="n">event_names</span><span class="p">(</span><span class="n">props</span><span class="p">):</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="n">v</span><span class="o">.</span><span class="n">addChangeListener</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">dispatch_event</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s2">"on_change"</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">return</span> <span class="n">v</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">changed</span><span class="p">):</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">if</span> <span class="s2">"text"</span> <span class="ow">in</span> <span class="n">changed</span><span class="p">:</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="n">view</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">changed</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="n">view</span><span class="o">.</span><span class="n">setFrame</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">measure_intrinsic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">max_w</span><span class="p">,</span> <span class="n">max_h</span><span class="p">):</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="n">size</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">max_w</span><span class="p">,</span> <span class="n">max_h</span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
-</span></code></pre></div>
-<p>Handlers do <strong>not</strong> read flex / margin / padding props themselves;
-those are interpreted by <code>pythonnative.layout</code> and turned into
-<code>SetFrameOp</code>s. A handler only needs to apply the frame it is given.</p>
-<h2 id="events-never-cross-the-bridge">Events never cross the bridge<a class="headerlink" href="#events-never-cross-the-bridge" title="Permanent link">&para;</a></h2>
-<p>Callable props (<code>on_press</code>, <code>on_change</code>, …) are stripped before a
+<p>Managers do <strong>not</strong> read flex, margin, or padding props; those are
+interpreted by <code>pythonnative.layout</code> and turned into <code>f</code> ops. A
+manager only applies the frame it is given.</p>
+<p>Managers fire events by tag through <code>PNEvents.emit(view, "on_change",
+[value])</code> (Swift) or <code>PNEvents.fire(view, "on_change", value)</code>
+(Kotlin). The bridge routes them to
+<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;dispatch_event&lt;/span&gt;" href="../../api/events/#pythonnative.events.dispatch_event"><code>dispatch_event</code></a>.</p>
+<h2 id="events-never-cross-the-bridge-as-callables">Events never cross the bridge as callables<a class="headerlink" href="#events-never-cross-the-bridge-as-callables" title="Permanent link">&para;</a></h2>
+<p>Callable props (<code>on_press</code>, <code>on_change</code>, ...) are stripped before a
 <code>CreateOp</code>/<code>UpdateOp</code> is built and registered in the process-wide
 <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;EventRegistry&lt;/span&gt;" href="../../api/events/#pythonnative.events.EventRegistry"><code>EventRegistry</code></a> keyed by
-<code>(tag, name)</code>. The native payload carries only <code>_pn_events</code> (a
-<code>frozenset</code> of the event names present) so handlers can wire expensive
-listeners (scroll delegates, gesture recognizers) conditionally.</p>
+<code>(tag, name)</code>. The native payload carries only <code>_pn_events</code> (the list
+of event names present) so managers can wire expensive listeners
+(scroll delegates, gesture recognizers) conditionally.</p>
 <p>The payoff: a re-render that only changes a callback's identity (every
-lambda is a fresh object!) costs <strong>zero</strong> native calls. The registry
+lambda is a fresh object) costs <strong>zero</strong> native calls. The registry
 swaps the Python-side callback and the already-wired native listener
 picks it up on the next dispatch.</p>
 <h2 id="the-registry">The registry<a class="headerlink" href="#the-registry" title="Permanent link">&para;</a></h2>
 <p>The <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;NativeViewRegistry&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.NativeViewRegistry"><code>NativeViewRegistry</code></a>
-maps element type strings to handler <em>instances</em> and owns the
-tag-to-view table. The registry is selected lazily by platform:</p>
+protocol is what the reconciler talks to. The implementation is chosen
+lazily by <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;get_registry&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.get_registry"><code>get_registry</code></a>:</p>
 <ul>
-<li>On Android, <code>pythonnative.native_views.android.register_handlers</code>
-  populates the registry with Chaquopy-backed handlers.</li>
-<li>On iOS, <code>pythonnative.native_views.ios.register_handlers</code> does the
-  same with handlers built on rubicon-objc plus raw <code>libobjc</code> bindings
-  for delegate-heavy widgets.</li>
-<li>On the desktop (<code>pn preview</code>, with <code>PN_PLATFORM=desktop</code>),
-  <code>pythonnative.native_views.desktop.register_handlers</code> populates the
-  registry with Tkinter-backed handlers. See the
-  <a href="../../guides/desktop-preview/">Desktop preview guide</a>.</li>
-<li>Off-device under <code>pytest</code>, the backend is replaced with a fake via
+<li>On iOS and Android, a
+  <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;BridgeBackend&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.bridge_backend.BridgeBackend"><code>BridgeBackend</code></a>
+  forwards every transaction, measurement, command, and animation
+  request to native.</li>
+<li>On the desktop (<code>pn preview</code>, with <code>PN_PLATFORM=desktop</code>), a
+  handler-based registry populated by
+  <code>pythonnative.native_views.desktop.register_handlers</code> renders with
+  Tkinter. See the <a href="../../guides/desktop-preview/">Desktop preview guide</a>.</li>
+<li>Under <code>pytest</code>, the backend is replaced with a fake via
   <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;set_registry&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.set_registry"><code>set_registry</code></a> (or by
   constructing the <code>Reconciler</code> with the fake directly).</li>
 </ul>
-<p>Per-op failures inside <code>apply_mutations</code> are isolated: a bad prop on
-one view logs a tripwire instead of desyncing the whole transaction.</p>
+<p>Per-op failures are isolated on both sides: a bad prop on one view
+logs a tripwire (Python) or a rate-limited native log instead of
+desyncing the whole transaction.</p>
 <h2 id="layout-and-styling">Layout and styling<a class="headerlink" href="#layout-and-styling" title="Permanent link">&para;</a></h2>
 <p>Layout-related style keys are interpreted by the central
-<code>pythonnative.layout</code> engine, <em>not</em> by the platform handlers. The
-full list (sizing, flex, position, margin, padding, spacing, …) is
+<code>pythonnative.layout</code> engine, <em>not</em> by the platform managers. The full
+list (sizing, flex, position, margin, padding, spacing, ...) is
 documented in <a href="../../api/component-properties/">Component properties</a>.
 The set of keys the layout engine consumes is exposed as
 <code>pythonnative.layout.LAYOUT_STYLE_KEYS</code>.</p>
-<p>Handlers only deal with <strong>visual</strong> properties: colours, fonts,
-borders, corner radii, image scaling, text content. After each commit
-the reconciler runs the layout pass and emits <code>SetFrameOp</code>s for every
-node whose frame changed.</p>
+<p>Managers only deal with <strong>visual</strong> properties: colors, fonts, borders,
+corner radii, image scaling, text content. After each commit the
+reconciler runs the layout pass and emits <code>SetFrameOp</code>s for every node
+whose frame changed.</p>
 <p>On each platform that boils down to:</p>
 <ul>
-<li><strong>iOS</strong>: every container is a plain <code>UIView</code> with
-  <code>translatesAutoresizingMaskIntoConstraints = NO</code>; <code>set_frame</code>
-  assigns <code>view.frame = CGRect(x, y, w, h)</code>. Leaf widgets implement
-  <code>measure_intrinsic</code> via <code>sizeThatFits_</code>. Visual props
-  (<code>background_color</code>, <code>border_radius</code>, <code>font_*</code>, <code>color</code>, <code>text_align</code>,
-  …) are applied directly through UIKit setters.</li>
-<li><strong>Android</strong>: every container is a plain <code>FrameLayout</code>; <code>set_frame</code>
-  builds a <code>MarginLayoutParams</code> and sets <code>view.x</code> / <code>view.y</code>. Padding
-  in <code>dp</code> is computed from <code>Resources.getDisplayMetrics().density</code>. Leaf
-  widgets implement <code>measure_intrinsic</code> with <code>View.measure(...)</code> plus
-  <code>MeasureSpec</code>. Visual props are applied through <code>setBackgroundColor</code>,
-  <code>setTextColor</code>, <code>setTextSize</code>, etc.</li>
+<li><strong>iOS</strong>: every container is a <code>PNContainerView</code> (a plain <code>UIView</code>)
+  with <code>translatesAutoresizingMaskIntoConstraints</code> on; <code>setFrame</code> sets
+  <code>bounds.size</code> and <code>center</code> so transforms and scroll offsets survive.
+  Leaf managers implement <code>measure</code> via <code>sizeThatFits</code>. Shared visual
+  props are applied by <code>PNViewStyler</code>.</li>
+<li><strong>Android</strong>: every container is a <code>PNFrameLayout</code>; <code>setFrame</code>
+  converts dp to pixels and positions the view through
+  <code>MarginLayoutParams</code>. Leaf managers implement <code>measure</code>
+  with <code>View.measure(...)</code> and <code>MeasureSpec</code>. Shared visual props are
+  applied by <code>ViewStyler</code>.</li>
 </ul>
-<p>Because layout is centralised, the same <code>style</code> dict produces the same
-geometry on Android and iOS; there's no "container-only" vs
-"child-only" trap to fall into.</p>
+<p>Because layout is centralized, the same <code>style</code> dict produces the same
+geometry on Android and iOS.</p>
 <h2 id="children">Children<a class="headerlink" href="#children" title="Permanent link">&para;</a></h2>
 <p>Children of a container element become subviews of the corresponding
 native view. The reconciler determines insertion order (and reorders
-on key change) and expresses it as <code>InsertOp</code> / <code>DestroyOp</code> ops; the
-handler performs the actual native mutations:</p>
-<ul>
-<li>iOS containers use <code>insertSubview_atIndex_</code> on a plain <code>UIView</code>.</li>
-<li>Android containers use <code>addView(child, index)</code> /
-  <code>removeView(child)</code> on a <code>FrameLayout</code>.</li>
-</ul>
-<p><code>InsertOp</code> is move-aware: handlers reposition a child that is already
-attached rather than duplicating it, which is how keyed reorders avoid
-recreating views.</p>
+on key change) and expresses it as <code>InsertOp</code> / <code>DestroyOp</code>; the
+manager performs the native mutation (<code>insertSubview(_:at:)</code> on iOS,
+<code>addView(child, index)</code> on Android). <code>InsertOp</code> is move-aware, which
+is how keyed reorders avoid recreating views.</p>
 <h2 id="testing-without-a-device">Testing without a device<a class="headerlink" href="#testing-without-a-device" title="Permanent link">&para;</a></h2>
-<p>Production handlers require Chaquopy (Android) or rubicon-objc (iOS),
-neither of which is available on a developer laptop. The test suite
-sidesteps this with <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;FakeBackend&lt;/span&gt;" href="../../api/testing/#pythonnative.testing.FakeBackend"><code>FakeBackend</code></a>,
-an in-memory backend implementing the same mutation protocol while
-keeping a real tree of <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;FakeView&lt;/span&gt;" href="../../api/testing/#pythonnative.testing.FakeView"><code>FakeView</code></a>
-objects. <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;render&lt;/span&gt;" href="../../api/testing/#pythonnative.testing.render"><code>render</code></a> wires it up:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pythonnative.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">render</span><span class="p">(</span><span class="n">MyComponent</span><span class="p">())</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">ops_of</span><span class="p">(</span><span class="s2">"create"</span><span class="p">)</span>  <span class="c1"># every applied op is recorded</span>
+<p>The test suite never loads Swift or Kotlin. It uses
+<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;FakeBackend&lt;/span&gt;" href="../../api/testing/#pythonnative.testing.FakeBackend"><code>FakeBackend</code></a>, an in-memory
+backend implementing the same mutation protocol while keeping a real
+tree of <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;FakeView&lt;/span&gt;" href="../../api/testing/#pythonnative.testing.FakeView"><code>FakeView</code></a> objects.
+<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;render&lt;/span&gt;" href="../../api/testing/#pythonnative.testing.render"><code>render</code></a> wires it up:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pythonnative.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">render</span><span class="p">(</span><span class="n">MyComponent</span><span class="p">())</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">get_by_text</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">ops_of</span><span class="p">(</span><span class="s2">"create"</span><span class="p">)</span>  <span class="c1"># every applied op is recorded</span>
 </span></code></pre></div>
-<p>Unlike the production registry, the fake <strong>raises</strong> on malformed
+<p>Unlike the production backend, the fake <strong>raises</strong> on malformed
 transactions (unknown tags, double-destroys), so reconciler bugs fail
 tests loudly instead of being swallowed. See the
 <a href="../../guides/testing/">Testing guide</a>.</p>
+<p>The bridge itself is tested with
+<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;FakeTransport&lt;/span&gt;" href="../../api/bridge/#pythonnative.bridge.fake.FakeTransport"><code>FakeTransport</code></a>, which
+decodes the JSON transactions the <code>BridgeBackend</code> produces and keeps a
+view tree the way native would. Native decoders and managers have
+their own XCTest and JUnit suites inside the templates.</p>
 <h2 id="custom-widgets">Custom widgets<a class="headerlink" href="#custom-widgets" title="Permanent link">&para;</a></h2>
-<p>Adding a widget is a three-step process, and the
-<a href="../../api/sdk/"><code>pythonnative.sdk</code></a> module gives you a ready-made,
-type-checked entry point for each step:</p>
+<p>Adding a widget means a Swift manager, a Kotlin manager, and a Python
+registration; the <a href="../../api/sdk/"><code>pythonnative.sdk</code></a> module gives you
+a type-checked entry point for the Python half:</p>
 <ol>
 <li>Define a frozen <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;Props&lt;/span&gt;
 
@@ -3525,56 +3574,27 @@ type-checked entry point for each step:</p>
       &lt;small class=&quot;doc doc-label doc-label-dataclass&quot;&gt;&lt;code&gt;dataclass&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../../api/sdk/#pythonnative.sdk.Props"><code>Props</code></a>
    dataclass listing the widget's API surface.</li>
-<li>Implement a <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ViewHandler&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.base.ViewHandler"><code>ViewHandler</code></a>
-   subclass per platform and decorate it with
-   <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;native_component&lt;/span&gt;" href="../../api/sdk/#pythonnative.sdk.native_component"><code>@native_component</code></a>.</li>
-<li>Hand callers an
-   <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;element_factory&lt;/span&gt;" href="../../api/sdk/#pythonnative.sdk.element_factory"><code>element_factory</code></a>
-   that validates kwargs against the dataclass and returns regular
-   <code>Element</code> instances.</li>
+<li>Implement <code>PNComponentManager</code> / <code>ComponentManager</code> subclasses and
+   register them under the element name from a <code>PNPlugin</code> entry.</li>
+<li>Call <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;register_component&lt;/span&gt;" href="../../api/sdk/#pythonnative.sdk.register_component"><code>register_component</code></a>
+   (or decorate a desktop
+   <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;ViewHandler&lt;/span&gt;" href="../../api/native_views/#pythonnative.native_views.base.ViewHandler"><code>ViewHandler</code></a> with
+   <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;native_component&lt;/span&gt;" href="../../api/sdk/#pythonnative.sdk.native_component"><code>@native_component</code></a>)
+   and hand callers an
+   <a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-function&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;element_factory&lt;/span&gt;" href="../../api/sdk/#pythonnative.sdk.element_factory"><code>element_factory</code></a>.</li>
 </ol>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pythonnative</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pn</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pythonnative.sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">Props</span><span class="p">,</span> <span class="n">ViewHandler</span><span class="p">,</span> <span class="n">element_factory</span><span class="p">,</span> <span class="n">native_component</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">RatingProps</span><span class="p">(</span><span class="n">Props</span><span class="p">):</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">on_change</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">style</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pn</span><span class="o">.</span><span class="n">StyleProp</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nd">@native_component</span><span class="p">(</span><span class="s2">"Rating"</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="n">RatingProps</span><span class="p">,</span> <span class="n">platforms</span><span class="o">=</span><span class="p">(</span><span class="s2">"ios"</span><span class="p">,))</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="k">class</span><span class="w"> </span><span class="nc">IOSRatingHandler</span><span class="p">(</span><span class="n">ViewHandler</span><span class="p">):</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">props</span><span class="p">):</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="o">...</span>  <span class="c1"># build a UIView wrapping star UIImageViews</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">changed</span><span class="p">):</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="o">...</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="n">Rating</span> <span class="o">=</span> <span class="n">element_factory</span><span class="p">(</span><span class="s2">"Rating"</span><span class="p">)</span>
-</span></code></pre></div>
-<p>After registration the reconciler treats <code>Rating</code> like any other
-element. PyPI plugins can register their handlers automatically via
-the <code>pythonnative.handlers</code> entry-point group (see
-<a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-attribute&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-attribute-name&quot;&gt;ENTRY_POINT_GROUP&lt;/span&gt;
-
-
-  &lt;span class=&quot;doc doc-labels&quot;&gt;
-      &lt;small class=&quot;doc doc-label doc-label-module-attribute&quot;&gt;&lt;code&gt;module-attribute&lt;/code&gt;&lt;/small&gt;
-  &lt;/span&gt;" href="../../api/sdk/#pythonnative.sdk.ENTRY_POINT_GROUP"><code>ENTRY_POINT_GROUP</code></a>),
-so users only have to <code>pip install</code> your package.</p>
-<p>For the full walkthrough (typed props, iOS handler, Android handler,
-distribution as a plugin, unit-testing), see the
-<a href="../../guides/custom-native-components/">Custom native components guide</a>.</p>
+<p>After registration the reconciler treats the new element like any
+other. <code>pn build</code> compiles the plugin's native sources into the app and
+PyPI packages register automatically through entry points. See the
+<a href="../../guides/custom-native-components/">Custom native components guide</a>
+for the full walkthrough.</p>
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
+<li>The wire protocol: <a href="../bridge/">The native bridge</a>.</li>
 <li>Browse the API: <a href="../../api/native_views/">Native views</a>.</li>
 <li>Read the <a href="../layout/">Layout engine</a> concept page to understand how
   <code>SetFrameOp</code>s are produced.</li>
-<li>See how the reconciler drives handlers: <a href="../reconciliation/">Reconciliation</a>.</li>
+<li>See how the reconciler drives the backend: <a href="../reconciliation/">Reconciliation</a>.</li>
 <li>Wrap a device API instead of a widget: <a href="../../guides/native-modules/">Native modules guide</a>.</li>
 </ul>
 
