@@ -543,6 +543,8 @@
       
         
       
+        
+      
     
     
     
@@ -767,6 +769,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../design/runtime-overhaul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime Overhaul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../components/" class="md-nav__link">
         
   
@@ -971,6 +1001,8 @@
   
     
     
+      
+        
       
         
       
@@ -1376,6 +1408,34 @@
     
   
     Native Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/native-contracts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated Native Contracts
   
 
     
@@ -3450,7 +3510,7 @@ that prevents render storms).</p>
 <tr>
 <td>Threading</td>
 <td>UI runs on the main thread; JS on a separate thread</td>
-<td>UI and reconciler both on the platform's main thread</td>
+<td>Native UI on its platform thread; Python on a dedicated asyncio application thread</td>
 </tr>
 <tr>
 <td>Distribution</td>
