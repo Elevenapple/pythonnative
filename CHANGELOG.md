@@ -1,6 +1,33 @@
 # CHANGELOG
 
 
+## v0.42.0 (2026-09-08)
+
+### Documentation
+
+- **cli**: Add help text for positional platform arguments
+  ([#81](https://github.com/pythonnative/pythonnative/pull/81),
+  [`a838a56`](https://github.com/pythonnative/pythonnative/commit/a838a56984a7a4da2d0a7f846d070c7e44f82cfe))
+
+Refs: #55
+
+### Features
+
+- **cli**: Add --json output to pn app-id
+  ([#77](https://github.com/pythonnative/pythonnative/pull/77),
+  [`94e9190`](https://github.com/pythonnative/pythonnative/commit/94e9190e5b5f13a0f24ee3973cb7ff950799b320))
+
+Refs: #56
+
+### Testing
+
+- **cli**: Cover app id derivation from project names
+  ([#79](https://github.com/pythonnative/pythonnative/pull/79),
+  [`5b1d965`](https://github.com/pythonnative/pythonnative/commit/5b1d9651c38c52ad2c8cd2a975970ada98aa360e))
+
+Refs: #62
+
+
 ## v0.41.0 (2026-09-08)
 
 ### Build System
