@@ -1,6 +1,61 @@
 # CHANGELOG
 
 
+## v0.41.0 (2026-09-08)
+
+### Build System
+
+- **workflows**: Publish portable wheels and recover releases
+  ([#82](https://github.com/pythonnative/pythonnative/pull/82),
+  [`b3680df`](https://github.com/pythonnative/pythonnative/commit/b3680df0623a73ea804490fd9bf6381028d5bb9c))
+
+### Continuous Integration
+
+- **workflows**: Isolate semantic-release action outputs
+  ([#83](https://github.com/pythonnative/pythonnative/pull/83),
+  [`b52499e`](https://github.com/pythonnative/pythonnative/commit/b52499e57dae9d7ff344a424b93655ab7cad8962))
+
+### Documentation
+
+- Remove overhaul report and refresh runtime guides
+  ([#84](https://github.com/pythonnative/pythonnative/pull/84),
+  [`607e0c7`](https://github.com/pythonnative/pythonnative/commit/607e0c70fb5e6bd785f0fbd11c20f5e2aa73f87e))
+
+- **repo**: Fix E2E workflow description in CONTRIBUTING.md
+  ([#69](https://github.com/pythonnative/pythonnative/pull/69),
+  [`052893e`](https://github.com/pythonnative/pythonnative/commit/052893e1612f999fc4995e0b2c062be9eed9822a))
+
+Refs: #53
+
+Co-authored-by: Owen Carey <37121709+owenthcarey@users.noreply.github.com>
+
+### Features
+
+- **cli**: Add --json output to pn doctor
+  ([#76](https://github.com/pythonnative/pythonnative/pull/76),
+  [`375c3a2`](https://github.com/pythonnative/pythonnative/commit/375c3a2d1e222c0cbf9afad6a6b4992d4d8e64ae))
+
+Refs: #37
+
+### Testing
+
+- **project**: Cover runtime_assets checksum and extraction helpers
+  ([#75](https://github.com/pythonnative/pythonnative/pull/75),
+  [`fc61648`](https://github.com/pythonnative/pythonnative/commit/fc61648287e342ccb35f637673faf131638bf458))
+
+Refs: #57
+
+Co-authored-by: Owen Carey <37121709+owenthcarey@users.noreply.github.com>
+
+- **utils**: Cover desktop platform detection
+  ([#68](https://github.com/pythonnative/pythonnative/pull/68),
+  [`fd831c9`](https://github.com/pythonnative/pythonnative/commit/fd831c92c5d8f410516b15692f97dd28aad4092a))
+
+Refs: #40
+
+Co-authored-by: Owen Carey <37121709+owenthcarey@users.noreply.github.com>
+
+
 ## v0.40.0 (2026-09-05)
 
 ### Continuous Integration
