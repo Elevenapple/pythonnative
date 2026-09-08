@@ -450,7 +450,7 @@ When you add a new public symbol you must also:
 ### CI
 
 - **CI** (`ci.yml`): runs formatter, linter, type checker, and tests on every push and PR.
-- **E2E** (`e2e.yml`): builds the `e2e-suite` example on Android (Linux emulator) and iOS (macOS simulator), then runs Maestro flows. Triggers on pushes to `main`, PRs, and manual dispatch.
+- **E2E** (`e2e.yml`): builds `examples/e2e-suite` on Android (Linux emulator) and iOS (macOS simulator), then runs Maestro flows by category. Triggers on pushes to `main`, PRs, and manual dispatch.
 - **Packages** (`packages.yml`): resolves the PyPI compatibility matrix in `tests/packages/matrix.toml` against the live indexes with `scripts/package-matrix.py --check`, weekly and on changes to the resolver or manifest, and uploads the rendered Markdown table for `docs/guides/pypi-packages.md`.
 - **PR Lint** (`pr-lint.yml`): validates the PR title against Conventional Commits format (protects squash merges) and checks individual commit messages via commitlint (protects rebase merges). Recommended: add the **PR title** job as a required status check in branch-protection settings.
 - **Release** (`release.yml`): runs on merge to `main`; computes version, generates changelog, tags, creates GitHub Release, and (when `DRAFT_RELEASE` is `"false"`) publishes to PyPI.
