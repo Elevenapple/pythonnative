@@ -1,23 +1,13 @@
 # CHANGELOG
 
-## Unreleased
 
-- Make element snapshots immutable and preserve ordinary Python component
-  argument binding, async provider context, stable setters, and deferred updates.
-- Stage reconciliation publication and roll back failed renders; retire surfaces
-  after native mount failures. Validate commits without copying unrelated records.
-- Enforce shared component, event, command, and service contracts, including
-  nested values, property resets, recreation, and native result types.
-- Use one list request protocol on every backend, stable dataset and item
-  revisions, bounded row ownership, and public indices that exclude headers.
-- Complete nested native stack ownership, input composition and selection,
-  dynamic text sizing, cancelable native work, and durable Android notifications.
-- Test the real browser renderer and native lifecycle behavior. Package the Inbox
-  extension separately and run reference-app acceptance on both mobile CI jobs.
-- Remove permissive transaction decoders, alternate headless list rendering,
-  obsolete compatibility branches, and unrestricted device-option dictionaries.
-  These pre-1.0 changes intentionally break superseded APIs.
+## v0.43.0 (2026-09-09)
 
+### Features
+
+- Overhaul native runtime contracts and lifecycle ownership
+  ([#86](https://github.com/pythonnative/pythonnative/pull/86),
+  [`0b21046`](https://github.com/pythonnative/pythonnative/commit/0b21046eac010bc0781d08577a245e919c660cc2))
 
 
 ## v0.42.0 (2026-09-08)
