@@ -99,8 +99,14 @@ data class ActivityIndicatorProps(val values: JSONObject) {
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val animating: Boolean? get() = if (values.isNull("animating")) null else values.getBoolean("animating")
     val size: Any? get() = if (values.isNull("size")) null else values.get("size")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ButtonProps(val values: JSONObject) {
@@ -209,6 +215,11 @@ data class ButtonProps(val values: JSONObject) {
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class CheckboxProps(val values: JSONObject) {
@@ -315,8 +326,14 @@ data class CheckboxProps(val values: JSONObject) {
     val accessibility_state: Any? get() = if (values.isNull("accessibility_state")) null else values.get("accessibility_state")
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ColumnProps(val values: JSONObject) {
@@ -424,6 +441,10 @@ data class ColumnProps(val values: JSONObject) {
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class DatePickerProps(val values: JSONObject) {
@@ -531,8 +552,14 @@ data class DatePickerProps(val values: JSONObject) {
     val accessibility_state: Any? get() = if (values.isNull("accessibility_state")) null else values.get("accessibility_state")
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ErrorBoundaryProps(val values: JSONObject) {
@@ -631,8 +658,14 @@ data class ErrorBoundaryProps(val values: JSONObject) {
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val fallback: Any? get() = if (values.isNull("fallback")) null else values.get("fallback")
     val on_error: Any? get() = if (values.isNull("on_error")) null else values.get("on_error")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class FlatListProps(val values: JSONObject) {
@@ -748,8 +781,14 @@ data class FlatListProps(val values: JSONObject) {
     val on_scroll: Any? get() = if (values.isNull("on_scroll")) null else values.get("on_scroll")
     val shows_scroll_indicator: Boolean? get() = if (values.isNull("shows_scroll_indicator")) null else values.getBoolean("shows_scroll_indicator")
     val content_container_style: Any? get() = if (values.isNull("content_container_style")) null else values.get("content_container_style")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class FragmentProps(val values: JSONObject) {
@@ -846,8 +885,14 @@ data class FragmentProps(val values: JSONObject) {
     val transform: Any? get() = if (values.isNull("transform")) null else values.get("transform")
     val z_index: Int? get() = if (values.isNull("z_index")) null else values.getInt("z_index")
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ImageProps(val values: JSONObject) {
@@ -956,6 +1001,11 @@ data class ImageProps(val values: JSONObject) {
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ImageBackgroundProps(val values: JSONObject) {
@@ -1059,8 +1109,14 @@ data class ImageBackgroundProps(val values: JSONObject) {
     val accessibility_state: Any? get() = if (values.isNull("accessibility_state")) null else values.get("accessibility_state")
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class KeyboardAvoidingViewProps(val values: JSONObject) {
@@ -1159,8 +1215,14 @@ data class KeyboardAvoidingViewProps(val values: JSONObject) {
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val behavior: Any? get() = if (values.isNull("behavior")) null else values.get("behavior")
     val keyboard_vertical_offset: Double? get() = if (values.isNull("keyboard_vertical_offset")) null else values.getDouble("keyboard_vertical_offset")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ModalProps(val values: JSONObject) {
@@ -1265,8 +1327,14 @@ data class ModalProps(val values: JSONObject) {
     val transparent: Boolean? get() = if (values.isNull("transparent")) null else values.getBoolean("transparent")
     val presentation_style: Any? get() = if (values.isNull("presentation_style")) null else values.get("presentation_style")
     val dismiss_on_backdrop: Boolean? get() = if (values.isNull("dismiss_on_backdrop")) null else values.getBoolean("dismiss_on_backdrop")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class PickerProps(val values: JSONObject) {
@@ -1374,8 +1442,14 @@ data class PickerProps(val values: JSONObject) {
     val accessibility_state: Any? get() = if (values.isNull("accessibility_state")) null else values.get("accessibility_state")
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class PortalProps(val values: JSONObject) {
@@ -1472,8 +1546,14 @@ data class PortalProps(val values: JSONObject) {
     val transform: Any? get() = if (values.isNull("transform")) null else values.get("transform")
     val z_index: Int? get() = if (values.isNull("z_index")) null else values.getInt("z_index")
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class PressableProps(val values: JSONObject) {
@@ -1586,6 +1666,10 @@ data class PressableProps(val values: JSONObject) {
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class ProgressBarProps(val values: JSONObject) {
@@ -1685,8 +1769,14 @@ data class ProgressBarProps(val values: JSONObject) {
     val value: Double? get() = if (values.isNull("value")) null else values.getDouble("value")
     val track_color: Any? get() = if (values.isNull("track_color")) null else values.get("track_color")
     val indeterminate: Boolean? get() = if (values.isNull("indeterminate")) null else values.getBoolean("indeterminate")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class RefreshControlProps(val values: JSONObject) {
@@ -1785,8 +1875,14 @@ data class RefreshControlProps(val values: JSONObject) {
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val refreshing: Boolean? get() = if (values.isNull("refreshing")) null else values.getBoolean("refreshing")
     val on_refresh: Any? get() = if (values.isNull("on_refresh")) null else values.get("on_refresh")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class RowProps(val values: JSONObject) {
@@ -1894,6 +1990,10 @@ data class RowProps(val values: JSONObject) {
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class SafeAreaViewProps(val values: JSONObject) {
@@ -1991,8 +2091,14 @@ data class SafeAreaViewProps(val values: JSONObject) {
     val z_index: Int? get() = if (values.isNull("z_index")) null else values.getInt("z_index")
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val edges: Any? get() = if (values.isNull("edges")) null else values.get("edges")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ScreenProps(val values: JSONObject) {
@@ -2103,6 +2209,28 @@ data class ScreenProps(val values: JSONObject) {
     val route_key: String? get() = if (values.isNull("route_key")) null else values.getString("route_key")
     val title: String? get() = if (values.isNull("title")) null else values.getString("title")
     val active: Boolean? get() = if (values.isNull("active")) null else values.getBoolean("active")
+    val options: Any? get() = if (values.isNull("options")) null else values.get("options")
+    val header_shown: Boolean? get() = if (values.isNull("header_shown")) null else values.getBoolean("header_shown")
+    val header_large_title: Boolean? get() = if (values.isNull("header_large_title")) null else values.getBoolean("header_large_title")
+    val header_back_title: String? get() = if (values.isNull("header_back_title")) null else values.getString("header_back_title")
+    val header_back_visible: Boolean? get() = if (values.isNull("header_back_visible")) null else values.getBoolean("header_back_visible")
+    val header_left: Any? get() = if (values.isNull("header_left")) null else values.get("header_left")
+    val header_right: Any? get() = if (values.isNull("header_right")) null else values.get("header_right")
+    val header_tint_color: String? get() = if (values.isNull("header_tint_color")) null else values.getString("header_tint_color")
+    val header_style: Any? get() = if (values.isNull("header_style")) null else values.get("header_style")
+    val header_title_style: Any? get() = if (values.isNull("header_title_style")) null else values.get("header_title_style")
+    val presentation: Any? get() = if (values.isNull("presentation")) null else values.get("presentation")
+    val gesture_enabled: Boolean? get() = if (values.isNull("gesture_enabled")) null else values.getBoolean("gesture_enabled")
+    val animation: Any? get() = if (values.isNull("animation")) null else values.get("animation")
+    val tab_bar_icon: Any? get() = if (values.isNull("tab_bar_icon")) null else values.get("tab_bar_icon")
+    val tab_bar_badge: Any? get() = if (values.isNull("tab_bar_badge")) null else values.get("tab_bar_badge")
+    val tab_bar_label: String? get() = if (values.isNull("tab_bar_label")) null else values.getString("tab_bar_label")
+    val lazy: Boolean? get() = if (values.isNull("lazy")) null else values.getBoolean("lazy")
+    val unmount_on_blur: Boolean? get() = if (values.isNull("unmount_on_blur")) null else values.getBoolean("unmount_on_blur")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class ScreenStackProps(val values: JSONObject) {
@@ -2211,6 +2339,10 @@ data class ScreenStackProps(val values: JSONObject) {
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_native_back: Any? get() = if (values.isNull("on_native_back")) null else values.get("on_native_back")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class ScrollViewProps(val values: JSONObject) {
@@ -2315,8 +2447,14 @@ data class ScrollViewProps(val values: JSONObject) {
     val bounces: Boolean? get() = if (values.isNull("bounces")) null else values.getBoolean("bounces")
     val content_container_style: Any? get() = if (values.isNull("content_container_style")) null else values.get("content_container_style")
     val keyboard_dismiss_mode: Any? get() = if (values.isNull("keyboard_dismiss_mode")) null else values.get("keyboard_dismiss_mode")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class SectionListProps(val values: JSONObject) {
@@ -2429,8 +2567,14 @@ data class SectionListProps(val values: JSONObject) {
     val on_end_reached: Any? get() = if (values.isNull("on_end_reached")) null else values.get("on_end_reached")
     val on_end_reached_threshold: Double? get() = if (values.isNull("on_end_reached_threshold")) null else values.getDouble("on_end_reached_threshold")
     val on_scroll: Any? get() = if (values.isNull("on_scroll")) null else values.get("on_scroll")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class SegmentedControlProps(val values: JSONObject) {
@@ -2536,8 +2680,14 @@ data class SegmentedControlProps(val values: JSONObject) {
     val accessibility_state: Any? get() = if (values.isNull("accessibility_state")) null else values.get("accessibility_state")
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class SliderProps(val values: JSONObject) {
@@ -2639,8 +2789,14 @@ data class SliderProps(val values: JSONObject) {
     val max_value: Double? get() = if (values.isNull("max_value")) null else values.getDouble("max_value")
     val on_change: Any? get() = if (values.isNull("on_change")) null else values.get("on_change")
     val accessibility_label: Any? get() = if (values.isNull("accessibility_label")) null else values.get("accessibility_label")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class SpacerProps(val values: JSONObject) {
@@ -2738,8 +2894,14 @@ data class SpacerProps(val values: JSONObject) {
     val z_index: Int? get() = if (values.isNull("z_index")) null else values.getInt("z_index")
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val size: Any? get() = if (values.isNull("size")) null else values.get("size")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class StatusBarProps(val values: JSONObject) {
@@ -2838,8 +3000,14 @@ data class StatusBarProps(val values: JSONObject) {
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val bar_style: Any? get() = if (values.isNull("bar_style")) null else values.get("bar_style")
     val hidden: Any? get() = if (values.isNull("hidden")) null else values.get("hidden")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class SuspenseProps(val values: JSONObject) {
@@ -2937,8 +3105,14 @@ data class SuspenseProps(val values: JSONObject) {
     val z_index: Int? get() = if (values.isNull("z_index")) null else values.getInt("z_index")
     val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
     val fallback: Any? get() = if (values.isNull("fallback")) null else values.get("fallback")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class SwitchProps(val values: JSONObject) {
@@ -3038,8 +3212,128 @@ data class SwitchProps(val values: JSONObject) {
     val value: Boolean? get() = if (values.isNull("value")) null else values.getBoolean("value")
     val on_change: Any? get() = if (values.isNull("on_change")) null else values.get("on_change")
     val accessibility_label: Any? get() = if (values.isNull("accessibility_label")) null else values.get("accessibility_label")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
+}
+
+data class TabBarProps(val values: JSONObject) {
+    init {
+    }
+    val width: Any? get() = if (values.isNull("width")) null else values.get("width")
+    val height: Any? get() = if (values.isNull("height")) null else values.get("height")
+    val min_width: Any? get() = if (values.isNull("min_width")) null else values.get("min_width")
+    val max_width: Any? get() = if (values.isNull("max_width")) null else values.get("max_width")
+    val min_height: Any? get() = if (values.isNull("min_height")) null else values.get("min_height")
+    val max_height: Any? get() = if (values.isNull("max_height")) null else values.get("max_height")
+    val aspect_ratio: Double? get() = if (values.isNull("aspect_ratio")) null else values.getDouble("aspect_ratio")
+    val flex: Double? get() = if (values.isNull("flex")) null else values.getDouble("flex")
+    val flex_grow: Double? get() = if (values.isNull("flex_grow")) null else values.getDouble("flex_grow")
+    val flex_shrink: Double? get() = if (values.isNull("flex_shrink")) null else values.getDouble("flex_shrink")
+    val flex_basis: Any? get() = if (values.isNull("flex_basis")) null else values.get("flex_basis")
+    val flex_direction: Any? get() = if (values.isNull("flex_direction")) null else values.get("flex_direction")
+    val flex_wrap: Any? get() = if (values.isNull("flex_wrap")) null else values.get("flex_wrap")
+    val justify_content: Any? get() = if (values.isNull("justify_content")) null else values.get("justify_content")
+    val align_items: Any? get() = if (values.isNull("align_items")) null else values.get("align_items")
+    val align_self: Any? get() = if (values.isNull("align_self")) null else values.get("align_self")
+    val align_content: Any? get() = if (values.isNull("align_content")) null else values.get("align_content")
+    val direction: Any? get() = if (values.isNull("direction")) null else values.get("direction")
+    val display: Any? get() = if (values.isNull("display")) null else values.get("display")
+    val position: Any? get() = if (values.isNull("position")) null else values.get("position")
+    val top: Any? get() = if (values.isNull("top")) null else values.get("top")
+    val right: Any? get() = if (values.isNull("right")) null else values.get("right")
+    val bottom: Any? get() = if (values.isNull("bottom")) null else values.get("bottom")
+    val left: Any? get() = if (values.isNull("left")) null else values.get("left")
+    val start: Any? get() = if (values.isNull("start")) null else values.get("start")
+    val end: Any? get() = if (values.isNull("end")) null else values.get("end")
+    val padding: Any? get() = if (values.isNull("padding")) null else values.get("padding")
+    val padding_top: Any? get() = if (values.isNull("padding_top")) null else values.get("padding_top")
+    val padding_bottom: Any? get() = if (values.isNull("padding_bottom")) null else values.get("padding_bottom")
+    val padding_left: Any? get() = if (values.isNull("padding_left")) null else values.get("padding_left")
+    val padding_right: Any? get() = if (values.isNull("padding_right")) null else values.get("padding_right")
+    val padding_start: Any? get() = if (values.isNull("padding_start")) null else values.get("padding_start")
+    val padding_end: Any? get() = if (values.isNull("padding_end")) null else values.get("padding_end")
+    val padding_horizontal: Any? get() = if (values.isNull("padding_horizontal")) null else values.get("padding_horizontal")
+    val padding_vertical: Any? get() = if (values.isNull("padding_vertical")) null else values.get("padding_vertical")
+    val margin: Any? get() = if (values.isNull("margin")) null else values.get("margin")
+    val margin_top: Any? get() = if (values.isNull("margin_top")) null else values.get("margin_top")
+    val margin_bottom: Any? get() = if (values.isNull("margin_bottom")) null else values.get("margin_bottom")
+    val margin_left: Any? get() = if (values.isNull("margin_left")) null else values.get("margin_left")
+    val margin_right: Any? get() = if (values.isNull("margin_right")) null else values.get("margin_right")
+    val margin_start: Any? get() = if (values.isNull("margin_start")) null else values.get("margin_start")
+    val margin_end: Any? get() = if (values.isNull("margin_end")) null else values.get("margin_end")
+    val margin_horizontal: Any? get() = if (values.isNull("margin_horizontal")) null else values.get("margin_horizontal")
+    val margin_vertical: Any? get() = if (values.isNull("margin_vertical")) null else values.get("margin_vertical")
+    val spacing: Double? get() = if (values.isNull("spacing")) null else values.getDouble("spacing")
+    val gap: Double? get() = if (values.isNull("gap")) null else values.getDouble("gap")
+    val row_gap: Double? get() = if (values.isNull("row_gap")) null else values.getDouble("row_gap")
+    val column_gap: Double? get() = if (values.isNull("column_gap")) null else values.getDouble("column_gap")
+    val overflow: Any? get() = if (values.isNull("overflow")) null else values.get("overflow")
+    val background_color: String? get() = if (values.isNull("background_color")) null else values.getString("background_color")
+    val color: String? get() = if (values.isNull("color")) null else values.getString("color")
+    val border_color: String? get() = if (values.isNull("border_color")) null else values.getString("border_color")
+    val placeholder_color: String? get() = if (values.isNull("placeholder_color")) null else values.getString("placeholder_color")
+    val tint_color: String? get() = if (values.isNull("tint_color")) null else values.getString("tint_color")
+    val border_width: Double? get() = if (values.isNull("border_width")) null else values.getDouble("border_width")
+    val border_radius: Double? get() = if (values.isNull("border_radius")) null else values.getDouble("border_radius")
+    val border_top_left_radius: Double? get() = if (values.isNull("border_top_left_radius")) null else values.getDouble("border_top_left_radius")
+    val border_top_right_radius: Double? get() = if (values.isNull("border_top_right_radius")) null else values.getDouble("border_top_right_radius")
+    val border_bottom_left_radius: Double? get() = if (values.isNull("border_bottom_left_radius")) null else values.getDouble("border_bottom_left_radius")
+    val border_bottom_right_radius: Double? get() = if (values.isNull("border_bottom_right_radius")) null else values.getDouble("border_bottom_right_radius")
+    val border_top_width: Double? get() = if (values.isNull("border_top_width")) null else values.getDouble("border_top_width")
+    val border_right_width: Double? get() = if (values.isNull("border_right_width")) null else values.getDouble("border_right_width")
+    val border_bottom_width: Double? get() = if (values.isNull("border_bottom_width")) null else values.getDouble("border_bottom_width")
+    val border_left_width: Double? get() = if (values.isNull("border_left_width")) null else values.getDouble("border_left_width")
+    val border_top_color: String? get() = if (values.isNull("border_top_color")) null else values.getString("border_top_color")
+    val border_right_color: String? get() = if (values.isNull("border_right_color")) null else values.getString("border_right_color")
+    val border_bottom_color: String? get() = if (values.isNull("border_bottom_color")) null else values.getString("border_bottom_color")
+    val border_left_color: String? get() = if (values.isNull("border_left_color")) null else values.getString("border_left_color")
+    val font_size: Double? get() = if (values.isNull("font_size")) null else values.getDouble("font_size")
+    val font_family: String? get() = if (values.isNull("font_family")) null else values.getString("font_family")
+    val font_weight: Any? get() = if (values.isNull("font_weight")) null else values.get("font_weight")
+    val bold: Boolean? get() = if (values.isNull("bold")) null else values.getBoolean("bold")
+    val italic: Boolean? get() = if (values.isNull("italic")) null else values.getBoolean("italic")
+    val text_align: Any? get() = if (values.isNull("text_align")) null else values.get("text_align")
+    val text_decoration: Any? get() = if (values.isNull("text_decoration")) null else values.get("text_decoration")
+    val text_transform: Any? get() = if (values.isNull("text_transform")) null else values.get("text_transform")
+    val line_height: Double? get() = if (values.isNull("line_height")) null else values.getDouble("line_height")
+    val letter_spacing: Double? get() = if (values.isNull("letter_spacing")) null else values.getDouble("letter_spacing")
+    val max_lines: Int? get() = if (values.isNull("max_lines")) null else values.getInt("max_lines")
+    val text_shadow_color: String? get() = if (values.isNull("text_shadow_color")) null else values.getString("text_shadow_color")
+    val text_shadow_offset: Any? get() = if (values.isNull("text_shadow_offset")) null else values.get("text_shadow_offset")
+    val text_shadow_radius: Double? get() = if (values.isNull("text_shadow_radius")) null else values.getDouble("text_shadow_radius")
+    val shadow_color: String? get() = if (values.isNull("shadow_color")) null else values.getString("shadow_color")
+    val shadow_offset: Any? get() = if (values.isNull("shadow_offset")) null else values.get("shadow_offset")
+    val shadow_opacity: Double? get() = if (values.isNull("shadow_opacity")) null else values.getDouble("shadow_opacity")
+    val shadow_radius: Double? get() = if (values.isNull("shadow_radius")) null else values.getDouble("shadow_radius")
+    val elevation: Double? get() = if (values.isNull("elevation")) null else values.getDouble("elevation")
+    val opacity: Double? get() = if (values.isNull("opacity")) null else values.getDouble("opacity")
+    val transform: Any? get() = if (values.isNull("transform")) null else values.get("transform")
+    val z_index: Int? get() = if (values.isNull("z_index")) null else values.getInt("z_index")
+    val pointer_events: Any? get() = if (values.isNull("pointer_events")) null else values.get("pointer_events")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
+    val hit_slop: Any? get() = if (values.isNull("hit_slop")) null else values.get("hit_slop")
+    val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val accessibility_label: Any? get() = if (values.isNull("accessibility_label")) null else values.get("accessibility_label")
+    val accessibility_hint: Any? get() = if (values.isNull("accessibility_hint")) null else values.get("accessibility_hint")
+    val accessibility_role: Any? get() = if (values.isNull("accessibility_role")) null else values.get("accessibility_role")
+    val accessible: Any? get() = if (values.isNull("accessible")) null else values.get("accessible")
+    val accessibility_state: Any? get() = if (values.isNull("accessibility_state")) null else values.get("accessibility_state")
+    val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
+    val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
+    val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
+    val items: Any? get() = if (values.isNull("items")) null else values.get("items")
+    val active_tab: String? get() = if (values.isNull("active_tab")) null else values.getString("active_tab")
+    val on_tab_select: Any? get() = if (values.isNull("on_tab_select")) null else values.get("on_tab_select")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class TextProps(val values: JSONObject) {
@@ -3147,6 +3441,11 @@ data class TextProps(val values: JSONObject) {
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
     val text: String? get() = if (values.isNull("text")) null else values.getString("text")
     val spans: Any? get() = if (values.isNull("spans")) null else values.get("spans")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class TextInputProps(val values: JSONObject) {
@@ -3246,6 +3545,7 @@ data class TextInputProps(val values: JSONObject) {
     val value: String? get() = if (values.isNull("value")) null else values.getString("value")
     val placeholder: Any? get() = if (values.isNull("placeholder")) null else values.get("placeholder")
     val on_change: Any? get() = if (values.isNull("on_change")) null else values.get("on_change")
+    val on_selection_change: Any? get() = if (values.isNull("on_selection_change")) null else values.get("on_selection_change")
     val on_submit: Any? get() = if (values.isNull("on_submit")) null else values.get("on_submit")
     val secure: Boolean? get() = if (values.isNull("secure")) null else values.getBoolean("secure")
     val multiline: Boolean? get() = if (values.isNull("multiline")) null else values.getBoolean("multiline")
@@ -3267,8 +3567,14 @@ data class TextInputProps(val values: JSONObject) {
     val accessibility_state: Any? get() = if (values.isNull("accessibility_state")) null else values.get("accessibility_state")
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class TouchableOpacityProps(val values: JSONObject) {
@@ -3378,6 +3684,11 @@ data class TouchableOpacityProps(val values: JSONObject) {
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
 
 data class ViewProps(val values: JSONObject) {
@@ -3485,6 +3796,10 @@ data class ViewProps(val values: JSONObject) {
     val accessibility_live_region: Any? get() = if (values.isNull("accessibility_live_region")) null else values.get("accessibility_live_region")
     val test_id: Any? get() = if (values.isNull("test_id")) null else values.get("test_id")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class VirtualListProps(val values: JSONObject) {
@@ -3597,6 +3912,16 @@ data class VirtualListProps(val values: JSONObject) {
     val count: Int? get() = if (values.isNull("count")) null else values.getInt("count")
     val estimated_item_size: Double? get() = if (values.isNull("estimated_item_size")) null else values.getDouble("estimated_item_size")
     val on_bind_row: Any? get() = if (values.isNull("on_bind_row")) null else values.get("on_bind_row")
+    val on_scroll: Any? get() = if (values.isNull("on_scroll")) null else values.get("on_scroll")
+    val horizontal: Boolean? get() = if (values.isNull("horizontal")) null else values.getBoolean("horizontal")
+    val row_heights: Any? get() = if (values.isNull("row_heights")) null else values.get("row_heights")
+    val item_revisions: Any? get() = if (values.isNull("item_revisions")) null else values.get("item_revisions")
+    val shows_scroll_indicator: Boolean? get() = if (values.isNull("shows_scroll_indicator")) null else values.getBoolean("shows_scroll_indicator")
+    val refresh_control: Any? get() = if (values.isNull("refresh_control")) null else values.get("refresh_control")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
 }
 
 data class WebViewProps(val values: JSONObject) {
@@ -3700,6 +4025,12 @@ data class WebViewProps(val values: JSONObject) {
     val on_navigation_state_change: Any? get() = if (values.isNull("on_navigation_state_change")) null else values.get("on_navigation_state_change")
     val inject_javascript: Any? get() = if (values.isNull("inject_javascript")) null else values.get("inject_javascript")
     val scroll_enabled: Boolean? get() = if (values.isNull("scroll_enabled")) null else values.getBoolean("scroll_enabled")
+    val accessibility_role: String? get() = if (values.isNull("accessibility_role")) null else values.getString("accessibility_role")
     val ref: Any? get() = if (values.isNull("ref")) null else values.get("ref")
     val on_layout: Any? get() = if (values.isNull("on_layout")) null else values.get("on_layout")
+    val _pn_events: Any? get() = if (values.isNull("_pn_events")) null else values.get("_pn_events")
+    val _pn_animated_events: Any? get() = if (values.isNull("_pn_animated_events")) null else values.get("_pn_animated_events")
+    val _pn_list_key: String? get() = if (values.isNull("_pn_list_key")) null else values.getString("_pn_list_key")
+    val _pn_edit_revision: Int? get() = if (values.isNull("_pn_edit_revision")) null else values.getInt("_pn_edit_revision")
+    val gestures: Any? get() = if (values.isNull("gestures")) null else values.get("gestures")
 }
