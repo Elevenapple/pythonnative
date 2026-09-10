@@ -20,17 +20,26 @@ with the native UI through a versioned bridge.
 
 Yes. Two patterns:
 
-- **Branch on `IS_ANDROID` / `IS_IOS`** for small differences inside
-  a shared component:
+- **Branch on `IS_ANDROID` / `IS_IOS` / `IS_WEB`** for small
+  differences inside a shared component:
 
     ```python
-    from pythonnative.utils import IS_ANDROID, IS_IOS
+    from pythonnative.utils import IS_ANDROID, IS_IOS, IS_WEB
 
     if IS_ANDROID:
         ...
     elif IS_IOS:
         ...
+    elif IS_WEB:
+        ...
     ```
+
+    `pn preview` and `pn start` set `PN_PLATFORM=web`, so `IS_WEB` is
+    `True` in the browser preview; see the
+    [Browser preview guide](../guides/browser-preview.md).
+    For a declarative alternative, use
+    [`Platform.select`][pythonnative.platform.Platform.select] with the
+    `"web"` key.
 
 - **Per-platform native modules** for larger pieces (a custom widget,
   a device API). Implement once per platform behind a single Python
